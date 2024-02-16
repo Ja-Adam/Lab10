@@ -1,12 +1,24 @@
 <?php
-    $data = array();
-    $dataList = array();
+$user = 'root';
+$pass = ''; 
+$dbName = 'lab_10'; 
+$host = 'localhost';                    
+$conn = new mysqli($host, $user, $pass, $dbName);                                       //DB-руу холбох
 
-    $data[0] = "No";
-    $data[1] = "Name";
-    $data[2] = "Age";
+if ($conn->connect_error) {                                                             
+    die("Холболт амжилтгүй: " . $conn->connect_error);
+}
 
-    array_push($dataList, $data);
+if(isset($_GET['q'])) {
+  $searchQuery = $_GET['q'];
+  
+  
 
-    echo json_encode($dataList);
+  
+  // Send JSON
+  header('Content-Type: application/json');
+  echo json_encode($results);
+} else {
+  echo 'No search query provided';
+}
 ?>
